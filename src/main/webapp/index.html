@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movies</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular-resource.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controller/MovieController.js"></script>
+    <script src="scripts/service/MovieService.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+</head>
+
+<body ng-app="app">
+
+<div ng-controller="MovieController" class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Movies</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-8">
+            <table class="table">
+                <tr>
+                    <th>Name</th>
+                    <th>Number of entrance</th>
+                    <th>Rating</th>
+                    <th></th>
+                </tr>
+                <tr ng-repeat="movie in movies">
+                    <td>{{ movie.name }}</td>
+                    <td>{{ movie.entranceNumber | number : fractionSize }}</td>
+                    <td>{{ movie.rating | number : 2 }}</td>
+                    <td ng-click="selectMovie(movie.name)">+</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-xs-4" ng-if="selectedMovie">
+            <h2>{{ selectedMovie.name }}</h2>
+            <table class="table">
+                <tr>
+                    <th>Actor</th>
+                    <th>Age</th>
+                </tr>
+                <tr ng-repeat="actor in selectedMovie.actors">
+                    <td>{{ actor.name }}</td>
+                    <td>{{ actor.age }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
